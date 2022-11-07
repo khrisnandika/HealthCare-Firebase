@@ -13,11 +13,22 @@ class ChatRoom extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   void onSendMessage() async {
-    await _firestore
-        .collection('chatroom')
-        .doc(chatRoomId)
-        .collection('chats')
-        .add({});
+    if (_messageController.text.isNotEmpty) {
+      Map<String, dynamic> message = {
+        "sendby": _auth.currentUser!.displayName!,
+        "message": _messageController.text,
+        "time": FieldValue.serverTimestamp(),
+      };
+
+      await _firestore
+          .collection('chatroom')
+          .doc(chatRoomId)
+          .collection('chats')
+          .add(message);
+       _messageController.clear();   
+    } else {
+      print("enter text");
+    }
   }
 
   @override
@@ -89,7 +100,7 @@ class ChatRoom extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: onSendMessage,
                       icon: Icon(
                         Icons.send,
                       ),
