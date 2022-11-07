@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:final_project/components/schedule_card.dart';
+import 'package:final_project/Components/schedule_card.dart';
 import 'package:final_project/constant.dart';
 
 class DetailScreen extends StatelessWidget {

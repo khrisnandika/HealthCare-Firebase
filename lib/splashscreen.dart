@@ -1,6 +1,6 @@
+import 'package:final_project/Authenticate/login.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/detail_screen.dart';
-import 'package:final_project/login.dart';
 import 'package:final_project/main.dart';
 
 import 'home.dart';

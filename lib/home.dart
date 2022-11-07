@@ -3,9 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:final_project/akun.dart';
-import 'package:final_project/chat.dart';
-import 'package:final_project/components/category_card.dart';
-import 'package:final_project/components/perawat_card.dart';
+import 'package:final_project/ChatRoom.dart/chat.dart';
+import 'package:final_project/Components/category_card.dart';
+import 'package:final_project/Components/perawat_card.dart';
 import 'package:final_project/constant.dart';
 import 'package:final_project/daftar_tmedis.dart';
 import 'package:final_project/dashboard.dart';
@@ -13,7 +13,7 @@ import 'package:final_project/detail_informasi.dart';
 import 'package:final_project/global.dart';
 import 'package:final_project/list.dart';
 
-import 'components/search_bar.dart';
+import 'Components/search_bar.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});

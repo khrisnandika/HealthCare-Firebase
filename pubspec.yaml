@@ -48,6 +48,7 @@ dependencies:
   moor: ^2.0.0
   moor_flutter: ^2.0.0
   get: ^4.6.5
+  firebase_messaging: ^14.0.4
   
 
 dev_dependencies:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:final_project/components/perawat_card.dart';
-import 'package:final_project/components/search_bar.dart';
+import 'package:final_project/Components/perawat_card.dart';
+import 'package:final_project/Components/search_bar.dart';
 import 'package:final_project/constant.dart';
 
 void main() {

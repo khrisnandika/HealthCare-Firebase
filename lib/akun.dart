@@ -1,3 +1,4 @@
+import 'package:final_project/Authenticate/methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:final_project/constant.dart';
 import 'package:final_project/edit_akun.dart';
 import 'package:final_project/global.dart';
-import 'package:final_project/login.dart';
 import 'package:final_project/setting.dart';
 
 class AkunProfil extends StatefulWidget {
@@ -170,15 +170,7 @@ class _AkunProfilState extends State<AkunProfil> {
                       vertical: 10,
                     ),
                     child: TextButton(
-                      onPressed: () {
-                        _signOut().then(
-                          (value) => Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => LoginPage(),
-                            ),
-                          ),
-                        );
-                      },
+                      onPressed: () => logOut(context),
                       style: TextButton.styleFrom(
                         backgroundColor: kGreyColor.withOpacity(0.1),
                         shape: RoundedRectangleBorder(

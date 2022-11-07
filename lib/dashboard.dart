@@ -1,15 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:final_project/components/category_card.dart';
-import 'package:final_project/components/layanan_card.dart';
-import 'package:final_project/components/perawat_card.dart';
-import 'package:final_project/components/search_bar.dart';
+import 'package:final_project/Components/category_card.dart';
+import 'package:final_project/Components/layanan_card.dart';
 import 'package:final_project/constant.dart';
-import 'package:final_project/list.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -56,19 +51,19 @@ class _DashboardState extends State<Dashboard> {
                 TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                      text: "Hi, Selamat Datang ",
-                      style: TextStyle(
+                      text: "Hi, ",
+                      style: GoogleFonts.montserrat(
                         color: kTitleTextColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
                       ),
                     ),
                     TextSpan(
                       text: user!.displayName!,
-                      style: TextStyle(
+                      style: GoogleFonts.montserrat(
                         color: kTitleTextColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
                       ),
                     ),
                   ],
