@@ -12,6 +12,14 @@ class ChatRoom extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  void onSendMessage() async {
+    await _firestore
+        .collection('chatroom')
+        .doc(chatRoomId)
+        .collection('chats')
+        .add({});
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
