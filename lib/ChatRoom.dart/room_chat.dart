@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:final_project/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -19,13 +20,13 @@ class ChatRoom extends StatelessWidget {
         "message": _messageController.text,
         "time": FieldValue.serverTimestamp(),
       };
-
+      _messageController.clear();
       await _firestore
           .collection('chatroom')
           .doc(chatRoomId)
           .collection('chats')
           .add(message);
-       _messageController.clear();   
+      _messageController.clear();
     } else {
       print("enter text");
     }
@@ -40,7 +41,7 @@ class ChatRoom extends StatelessWidget {
         title: Text(
           userMap!['nama'],
         ),
-        centerTitle: true,
+        backgroundColor: kHealthCareColor,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -61,7 +62,9 @@ class ChatRoom extends StatelessWidget {
                     return ListView.builder(
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
-                        return Text(snapshot.data!.docs[index]['message']);
+                        Map<String, dynamic> map = snapshot.data!.docs[index]
+                            .data() as Map<String, dynamic>;
+                        return message(size, map);
                       },
                     );
                   } else {
@@ -112,6 +115,31 @@ class ChatRoom extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget message(Size size, Map<String, dynamic> map) {
+    return Container(
+      width: size.width,
+      alignment: map['sendby'] == _auth.currentUser!.displayName
+          ? Alignment.centerRight
+          : Alignment.centerLeft,
+           child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: kHealthCareColor,
+            ),
+            child: Text(
+              map['message'],
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: kBackgroundColor,
+              ),
+            ),
+           ),
     );
   }
 }

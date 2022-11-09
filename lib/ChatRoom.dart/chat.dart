@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/ChatRoom.dart/room_chat.dart';
+import 'package:final_project/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -10,13 +11,39 @@ class PesanChat extends StatefulWidget {
   State<PesanChat> createState() => _PesanChatState();
 }
 
-class _PesanChatState extends State<PesanChat> {
+class _PesanChatState extends State<PesanChat> with WidgetsBindingObserver {
   Map<String, dynamic>? userMap;
   bool isLoading = false;
 
   final TextEditingController _searchController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    setStatus("Online");
+  }
+
+  void setStatus(String status) async {
+    await _firestore.collection('user_details').doc(_auth.currentUser!.uid).update({
+      "status": status,
+    });
+  }
+
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // online
+      setStatus("Online");
+    } else {
+      // offline
+      setStatus("Offline");
+    }
+  }
 
   String chatRoomId(String user1, String user2) {
     if (user1[0].toLowerCase().codeUnits[0] >
@@ -53,7 +80,8 @@ class _PesanChatState extends State<PesanChat> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Chat"),
-        centerTitle: true,
+        automaticallyImplyLeading: false,
+        backgroundColor: kHealthCareColor,
       ),
       body: isLoading
           ? Center(
@@ -88,9 +116,16 @@ class _PesanChatState extends State<PesanChat> {
                 SizedBox(
                   height: size.height / 50,
                 ),
-                ElevatedButton(
-                  onPressed: onSearch,
-                  child: Text("cari"),
+                new SizedBox(
+                  height: 40,
+                  width: 100,
+                  child: ElevatedButton(
+                    onPressed: onSearch,
+                    child: Text("cari"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: kHealthCareColor,
+                    )
+                  ),
                 ),
                 SizedBox(
                   height: size.height / 30,

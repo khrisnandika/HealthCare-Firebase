@@ -44,7 +44,7 @@ class DetailScreen extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       child: SvgPicture.asset(
-                        'icons/back.svg',
+                        'assets/icons/back.svg',
                         height: 18,
                       ),
                     ),

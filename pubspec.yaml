@@ -49,6 +49,9 @@ dependencies:
   moor_flutter: ^2.0.0
   get: ^4.6.5
   firebase_messaging: ^14.0.4
+  image_picker: ^0.8.6
+  firebase_storage: ^11.0.4
+  uuid: ^3.0.6
   
 
 dev_dependencies:
@@ -77,6 +80,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/image/
+    - assets/icons/back.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

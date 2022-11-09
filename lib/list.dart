@@ -137,7 +137,7 @@ class LihatSemua extends StatelessWidget {
       child: Column(
         children: <Widget>[
           PerawatCard(
-            'Intan Sulistyaningrum Sakkinah',
+            'Asep',
             'Perawat \nSTR 351212121212',
             'assets/image/doctor1.png',
             kBlueColor,

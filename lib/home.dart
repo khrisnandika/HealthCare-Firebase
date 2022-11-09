@@ -12,7 +12,6 @@ import 'package:final_project/dashboard.dart';
 import 'package:final_project/detail_informasi.dart';
 import 'package:final_project/global.dart';
 import 'package:final_project/list.dart';
-
 import 'Components/search_bar.dart';
 
 class MyHomePage extends StatefulWidget {
