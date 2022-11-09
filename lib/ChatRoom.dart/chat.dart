@@ -116,6 +116,10 @@ class _PesanChatState extends State<PesanChat> with WidgetsBindingObserver {
                 SizedBox(
                   height: size.height / 50,
                 ),
+                // Text(userMap!['nama']),
+                SizedBox(
+                  height: 20,
+                ),
                 new SizedBox(
                   height: 40,
                   width: 100,

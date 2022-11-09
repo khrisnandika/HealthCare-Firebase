@@ -1,15 +1,38 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:final_project/Profile/akun.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:final_project/akun.dart';
 import 'package:final_project/constant.dart';
-import 'package:final_project/edit_akun.dart';
 import 'package:final_project/global.dart';
 
-class EditAkun extends StatelessWidget {
+class EditAkun extends StatefulWidget {
+  @override
+  State<EditAkun> createState() => _EditAkunState();
+}
+
+class _EditAkunState extends State<EditAkun> {
   final global = Global();
+
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  final User? user = FirebaseAuth.instance.currentUser;
+
+  final TextEditingController _namaController = TextEditingController();
+
+  String alamat = '';
+
+  Future getDocId() async {
+    var result = await _firebaseFirestore
+        .collection('user_details')
+        .where('uid', isEqualTo: user?.uid)
+        .get();
+    setState(() {
+      alamat = result.docs[0]['alamat'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +107,9 @@ class EditAkun extends StatelessWidget {
                       height: 46,
                       width: 46,
                       child: FloatingActionButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          
+                        },
                         child: Icon(
                           Icons.edit,
                         ),
@@ -103,7 +128,36 @@ class EditAkun extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 30,
+                horizontal: 35,
+                vertical: 10,
+              ),
+              child: TextField(
+                controller: _namaController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10),
+                  ),
+                  focusedBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: kHealthCareColor,
+                    ),
+                  ),
+                  // labelText: 'Nama Lengkap',
+                  // labelStyle: GoogleFonts.montserrat(
+                  //   color: kHealthCareColor,
+                  //   fontSize: 14
+                  // ),
+                  hintText: user!.displayName!,
+                  hintStyle: GoogleFonts.montserrat(
+                    fontSize: 14
+                  )
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 35,
                 vertical: 10,
               ),
               child: TextField(
@@ -117,35 +171,21 @@ class EditAkun extends StatelessWidget {
                       color: kHealthCareColor,
                     ),
                   ),
-                  labelText: 'Nama Lengkap',
-                  hintText: 'masukkan nama lengkap anda',
+                  // labelText: 'Email',
+                  // labelStyle: GoogleFonts.montserrat(
+                  //   color: kHealthCareColor,
+                  //   fontSize: 14
+                  // ),
+                  hintText: user!.email!,
+                  hintStyle: GoogleFonts.montserrat(
+                    fontSize: 14
+                  )
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 30,
-                vertical: 10,
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(10),
-                  ),
-                  focusedBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: kHealthCareColor,
-                    ),
-                  ),
-                  labelText: 'Email',
-                  hintText: 'masukkan nama lengkap anda',
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 30,
+                horizontal: 35,
                 vertical: 10,
               ),
               child: TextField(
@@ -160,7 +200,14 @@ class EditAkun extends StatelessWidget {
                     ),
                   ),
                   labelText: 'Alamat',
-                  hintText: 'masukkan nama lengkap anda',
+                  labelStyle: GoogleFonts.montserrat(
+                    color: kHealthCareColor,
+                    fontSize: 14
+                  ),
+                  hintText: 'masukkan alamat lengkap anda',
+                  hintStyle: GoogleFonts.montserrat(
+                    fontSize: 14
+                  )
                 ),
               ),
             ),
@@ -169,16 +216,21 @@ class EditAkun extends StatelessWidget {
             ),
             new SizedBox(
               height: 50,
-              width: 330,
+              width: 325,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  user?.updateDisplayName(_namaController.text);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kHealthCareColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: Text('Edit'),
+                child: Text('Simpan',
+                style: GoogleFonts.montserrat(
+                  fontWeight: FontWeight.w500,
+                ),),
               ),
             ),
           ],
