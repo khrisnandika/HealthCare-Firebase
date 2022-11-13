@@ -20,6 +20,7 @@ class _EditAkunState extends State<EditAkun> {
   final User? user = FirebaseAuth.instance.currentUser;
 
   final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   String alamat = '';
 
@@ -30,6 +31,28 @@ class _EditAkunState extends State<EditAkun> {
         .get();
     setState(() {
       alamat = result.docs[0]['alamat'];
+    });
+  }
+  Future editData() async {
+    if(_namaController.text!=''){
+      user!.updateDisplayName(_namaController.text);
+      
+    };
+    // if(_emailController.text!=''){
+    //   user!.updateEmail(_emailController.text);
+    //   print('object');
+    // };
+  }
+  @override
+  void initState() {
+    getData();
+
+    super.initState();
+  }
+  getData() {
+    setState(() {
+      _namaController.text = user!.displayName!;
+      _emailController.text= user!.email!;
     });
   }
 
@@ -107,9 +130,7 @@ class _EditAkunState extends State<EditAkun> {
                       height: 46,
                       width: 46,
                       child: FloatingActionButton(
-                        onPressed: () {
-                          
-                        },
+                        onPressed: () {},
                         child: Icon(
                           Icons.edit,
                         ),
@@ -134,25 +155,48 @@ class _EditAkunState extends State<EditAkun> {
               child: TextField(
                 controller: _namaController,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(10),
-                  ),
-                  focusedBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: kHealthCareColor,
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(10),
                     ),
-                  ),
-                  // labelText: 'Nama Lengkap',
-                  // labelStyle: GoogleFonts.montserrat(
-                  //   color: kHealthCareColor,
-                  //   fontSize: 14
-                  // ),
-                  hintText: user!.displayName!,
-                  hintStyle: GoogleFonts.montserrat(
-                    fontSize: 14
-                  )
-                ),
+                    focusedBorder: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: kHealthCareColor,
+                      ),
+                    ),
+                    // labelText: 'Nama Lengkap',
+                    // labelStyle: GoogleFonts.montserrat(
+                    //   color: kHealthCareColor,
+                    //   fontSize: 14
+                    // ),
+                    hintText: user!.displayName!,
+                    hintStyle: GoogleFonts.montserrat(fontSize: 14)),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 35,
+                vertical: 10,
+              ),
+              child: TextField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(10),
+                    ),
+                    focusedBorder: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: kHealthCareColor,
+                      ),
+                    ),
+                    // labelText: 'Email',
+                    // labelStyle: GoogleFonts.montserrat(
+                    //   color: kHealthCareColor,
+                    //   fontSize: 14
+                    // ),
+                    hintText: user!.email!,
+                    hintStyle: GoogleFonts.montserrat(fontSize: 14)),
               ),
             ),
             Padding(
@@ -162,53 +206,20 @@ class _EditAkunState extends State<EditAkun> {
               ),
               child: TextField(
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(10),
-                  ),
-                  focusedBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: kHealthCareColor,
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(10),
                     ),
-                  ),
-                  // labelText: 'Email',
-                  // labelStyle: GoogleFonts.montserrat(
-                  //   color: kHealthCareColor,
-                  //   fontSize: 14
-                  // ),
-                  hintText: user!.email!,
-                  hintStyle: GoogleFonts.montserrat(
-                    fontSize: 14
-                  )
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 35,
-                vertical: 10,
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(10),
-                  ),
-                  focusedBorder: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: kHealthCareColor,
+                    focusedBorder: new OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: kHealthCareColor,
+                      ),
                     ),
-                  ),
-                  labelText: 'Alamat',
-                  labelStyle: GoogleFonts.montserrat(
-                    color: kHealthCareColor,
-                    fontSize: 14
-                  ),
-                  hintText: 'masukkan alamat lengkap anda',
-                  hintStyle: GoogleFonts.montserrat(
-                    fontSize: 14
-                  )
-                ),
+                    labelText: 'Alamat',
+                    labelStyle: GoogleFonts.montserrat(
+                        color: kHealthCareColor, fontSize: 14),
+                    hintText: 'masukkan alamat lengkap anda',
+                    hintStyle: GoogleFonts.montserrat(fontSize: 14)),
               ),
             ),
             SizedBox(
@@ -218,19 +229,19 @@ class _EditAkunState extends State<EditAkun> {
               height: 50,
               width: 325,
               child: ElevatedButton(
-                onPressed: () {
-                  user?.updateDisplayName(_namaController.text);
-                },
+                onPressed: () async => await editData(),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kHealthCareColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: Text('Simpan',
-                style: GoogleFonts.montserrat(
-                  fontWeight: FontWeight.w500,
-                ),),
+                child: Text(
+                  'Simpan',
+                  style: GoogleFonts.montserrat(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ),
           ],

@@ -192,7 +192,10 @@ class _DashboardState extends State<Dashboard> {
           SizedBox(
             width: 20,
           ),
-          LayananCard('Layanan \nBidan', 'assets/image/bidan.png')
+          LayananCard('Layanan \nBidan', 'assets/image/bidan.png'),
+          SizedBox(
+            width: 30,
+          ),
         ],
       ),
     );
