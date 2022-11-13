@@ -1,12 +1,14 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:final_project/Authenticate/login.dart';
+import 'package:final_project/Onboarding/onboarding_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
 }
 
@@ -30,26 +32,8 @@ class MyApp extends StatelessWidget {
           duration: 3000,
           splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Color(0xff0ab885),
-          nextScreen: LoginPage()),
-
-      // Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Container(
-      //         height: 100,
-      //         width: 100,
-      //         color: Colors.blue,
-      //       ),
-      //       Container(
-      //         child: Text(
-      //           'Splash Screen',
-      //           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+          nextScreen: OnboardingPage()),
     );
   }
 }
+

@@ -11,3 +11,4 @@ var kSearchTextColor = Color(0xffC0C0C0);
 var kCategoryTextColor = Color(0xff292685);
 var kHealthCareColor = Color(0xff0ab885);
 var kGreyColor = Color(0xff525252);
+var kOnboardingColor = Color(0xffD3F2E9);
