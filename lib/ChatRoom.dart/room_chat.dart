@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ChatRoom extends StatelessWidget {
   Map<String, dynamic>? userMap;
@@ -77,6 +78,7 @@ class ChatRoom extends StatelessWidget {
                       return ListView.builder(
                         reverse: true,
                         itemCount: snapshot.data!.docs.length,
+                        physics: BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           Map<String, dynamic> map = snapshot.data!.docs[index]
                               .data() as Map<String, dynamic>;
@@ -105,6 +107,7 @@ class ChatRoom extends StatelessWidget {
                         child: TextField(
                           controller: _messageController,
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(horizontal: 12),
                             filled: true,
                             fillColor: kWhiteColor,
                             suffixIcon: IconButton(
@@ -122,7 +125,10 @@ class ChatRoom extends StatelessWidget {
                                 color: kHealthCareColor,
                               ),
                             ),
-                            hintText: 'Tulis pesan...'
+                            hintText: "Tulis Pesan...",
+                            hintStyle: GoogleFonts.notoSans(
+                              fontSize: 15,
+                            ),
                           ),
                         ),
                       ),

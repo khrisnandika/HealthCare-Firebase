@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:final_project/Components/schedule_card.dart';
+import 'package:final_project/Widget/schedule_card.dart';
 import 'package:final_project/constant.dart';
 
 class DetailInformasi extends StatelessWidget {

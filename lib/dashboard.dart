@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:final_project/Components/category_card.dart';
-import 'package:final_project/Components/layanan_card.dart';
+import 'package:final_project/Widget/category_card.dart';
+import 'package:final_project/Widget/layanan_card.dart';
 import 'package:final_project/constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -26,6 +26,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    print(user);
     return SafeArea(
       bottom: false,
       child: SingleChildScrollView(
@@ -166,14 +167,6 @@ class _DashboardState extends State<Dashboard> {
           ),
           SizedBox(
             width: 30,
-          ),
-          // CategoryCard(
-          //   'Tulang',
-          //   'icons/eye_specialist.png',
-          //   kOrangeColor,
-          // ),
-          SizedBox(
-            width: 10,
           ),
         ],
       ),

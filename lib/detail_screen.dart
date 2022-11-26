@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:final_project/Components/schedule_card.dart';
+import 'package:final_project/Widget/schedule_card.dart';
 import 'package:final_project/constant.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -121,14 +121,19 @@ class DetailScreen extends StatelessWidget {
                                   SizedBox(
                                     width: 16,
                                   ),
-                                  Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: kYellowColor.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: SvgPicture.asset(
-                                      'assets/icons/chat.svg',
+                                  InkWell(
+                                    onTap: () {
+                                      
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: kYellowColor.withOpacity(0.1),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: SvgPicture.asset(
+                                        'assets/icons/chat.svg',
+                                      ),
                                     ),
                                   ),
                                   SizedBox(

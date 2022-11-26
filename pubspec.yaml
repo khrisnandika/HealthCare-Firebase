@@ -49,11 +49,14 @@ dependencies:
   moor_flutter: ^2.0.0
   get: ^4.6.5
   firebase_messaging: ^14.0.4
-  image_picker: ^0.8.6
+  image_picker: ^0.8.4+1
+  image_cropper: ^1.4.1
   firebase_storage: ^11.0.4
   uuid: ^3.0.6
   concentric_transition: ^1.0.1+1
   lottie: ^2.0.0
+  http: ^0.13.5
+  
 
 dev_dependencies:
   flutter_test:
@@ -83,9 +86,6 @@ flutter:
     - assets/image/
     - assets/icons/back.svg
     - assets/animation/.
-    - assets/image/img-1.png
-    - assets/image/img-2.png
-    - assets/image/img-3.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

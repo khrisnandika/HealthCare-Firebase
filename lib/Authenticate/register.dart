@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:final_project/Authenticate/login.dart';
 import 'package:final_project/Authenticate/methods.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool isLoading = false;
 
+  
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

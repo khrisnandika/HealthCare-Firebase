@@ -1,8 +1,8 @@
 import 'package:final_project/static.dart';
 import 'package:flutter/material.dart';
-import 'package:final_project/Components/category_card.dart';
-import 'package:final_project/Components/perawat_card.dart';
-import 'package:final_project/Components/search_bar.dart';
+import 'package:final_project/Widget/category_card.dart';
+import 'package:final_project/Widget/perawat_card.dart';
+import 'package:final_project/Widget/search_bar.dart';
 import 'package:final_project/constant.dart';
 import 'package:final_project/dashboard.dart';
 import 'package:final_project/global.dart';

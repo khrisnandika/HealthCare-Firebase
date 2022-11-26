@@ -1,19 +1,16 @@
-import 'package:final_project/Profile/akun.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:final_project/Chat/models/UIHelper.dart';
+import 'package:final_project/Chat/models/UserModel.dart';
+import 'package:final_project/Chat/pages/HomePage.dart';
 import 'package:final_project/ChatRoom.dart/chat.dart';
-import 'package:final_project/Components/category_card.dart';
-import 'package:final_project/Components/perawat_card.dart';
+import 'package:final_project/Profile/akun.dart';
 import 'package:final_project/constant.dart';
-import 'package:final_project/daftar_tmedis.dart';
 import 'package:final_project/dashboard.dart';
-import 'package:final_project/detail_informasi.dart';
 import 'package:final_project/global.dart';
 import 'package:final_project/list.dart';
-import 'Components/search_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -25,8 +22,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   final global = Global();
-  List Pindah = [Dashboard(), LihatSemua(), PesanChat(), AkunProfil()];
+  List Pindah = [
+    Dashboard(),
+    LihatSemua(),
+    PesanChat(),
+    HomePage(userModel: userModel, firebaseUser: firebaseUser),
+    // HomePage(userModel: UserModel()),
+    AkunProfil()
+  ];
 
   @override
   Widget build(BuildContext context) {

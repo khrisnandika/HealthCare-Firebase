@@ -14,7 +14,7 @@ List<Map<String, dynamic>> perawats = [
     "name": "Asep",
     "status": "Perawat",
     "str": "351212121212",
-    "image": "assets/image/doctor1.png",
+    "image": "assets/image/doctor2.png",
     "color": kOrangeColor,
   },
   {
