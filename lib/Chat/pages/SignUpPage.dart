@@ -64,7 +64,7 @@ class _SignUpPageState extends State<SignUpPage> {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return CompleteProfile(userModel: newUser, firebaseUser: credential!.user!);
+              return CompleteProfile(userModel: newUser);
             }
           ),
         );

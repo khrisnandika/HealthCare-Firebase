@@ -28,6 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
     LihatSemua(),
     // PesanChat(),
     HomePage(userModel: UserModel()),
+    // HomePage(userModel: userModel, firebaseUser: firebaseUser),
     // HomePage(userModel: UserModel()),
     AkunProfil()
   ];

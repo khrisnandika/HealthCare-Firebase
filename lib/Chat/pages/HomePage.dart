@@ -13,13 +13,8 @@ import 'package:get/get.dart';
 class HomePage extends StatefulWidget {
   final UserModel userModel;
   // final User firebaseUser;
-  // final userNeed = Get.put(UserModel());
 
-  const HomePage({
-    Key? key,
-    required this.userModel,
-    // required this.firebaseUser,
-  }) : super(key: key);
+  const HomePage({Key? key, required this.userModel}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -28,8 +23,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    print(widget.userModel.uid);
+    getData();
     super.initState();
+  }
+
+  getData() async {
+    var data = FirebaseFirestore.instance
+        .collection("chatrooms")
+        .where("participants.${widget.userModel.uid}", isEqualTo: true)
+        .snapshots();
+        print(widget.userModel.uid);
   }
 
   @override
@@ -96,7 +99,6 @@ class _HomePageState extends State<HomePage> {
                                     MaterialPageRoute(builder: (context) {
                                       return ChatRoomPage(
                                         chatroom: chatRoomModel,
-                                        // firebaseUser: widget.firebaseUser,
                                         userModel: widget.userModel,
                                         targetUser: targetUser,
                                       );
@@ -152,10 +154,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return SearchPage(
-              userModel: widget.userModel,
-              // firebaseUser: widget.firebaseUser,
-            );
+            return SearchPage(userModel: widget.userModel);
           }));
         },
         child: Icon(Icons.search),

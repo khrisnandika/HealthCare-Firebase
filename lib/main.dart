@@ -1,3 +1,51 @@
+// import 'dart:io';
+
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:final_project/screens/login/hello.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+
+// const bool USE_EMULATOR = true;
+// Future main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+//   if (USE_EMULATOR) {
+//     _connectToFirebaseEmulator();
+//   }
+//   runApp(MyApp());
+// }
+
+// Future _connectToFirebaseEmulator() async {
+//   final fireStorePort = "8090";
+//   final authPort = 9099;
+//   final storagePort = 9199;
+//   final localHost = Platform.isAndroid ? '10.0.2.2' : 'localhost';
+//   FirebaseFirestore.instance.settings = Settings(
+//       host: "$localHost:$fireStorePort",
+//       sslEnabled: false,
+//       persistenceEnabled: false);
+
+//   await FirebaseAuth.instance.useAuthEmulator(localHost, authPort);
+//   await FirebaseStorage.instance.useStorageEmulator(localHost, storagePort);
+// }
+
+// class MyApp extends StatelessWidget {
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return CupertinoApp(
+//       debugShowCheckedModeBanner: false,
+//       home: Hello(),
+//       theme: CupertinoThemeData(
+//           brightness: Brightness.light, primaryColor: Color(0xFF08C187)),
+//     );
+//   }
+// }
+
+
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:final_project/Chat/models/FirebaseHelper.dart';
 import 'package:final_project/Chat/models/UserModel.dart';

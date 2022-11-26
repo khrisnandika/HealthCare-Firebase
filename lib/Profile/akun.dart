@@ -83,7 +83,9 @@ class _AkunProfilState extends State<AkunProfil> {
               height: 20,
             ),
             Text(
-              user!.displayName!,
+              user!.displayName.runtimeType == Null
+                          ? '-'
+                          : user!.displayName.toString(),
               style: TextStyle(
                 color: kTitleTextColor,
                 fontSize: 20,

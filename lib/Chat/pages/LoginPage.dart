@@ -72,12 +72,11 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.popUntil(context, (route) => route.isFirst);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) {
-          return MyHomePage(
-            title: "ok",
-            // firebaseUser: credential!.user!,
-          );
-        }),
+        MaterialPageRoute(
+          builder: (context) {
+            return MyHomePage(title: "");
+          }
+        ),
       );
     }
   }

@@ -15,9 +15,9 @@ import 'package:image_picker/image_picker.dart';
 
 class CompleteProfile extends StatefulWidget {
   final UserModel userModel;
-  final User firebaseUser;
+  // final User firebaseUser;
 
-  const CompleteProfile({Key? key, required this.userModel, required this.firebaseUser}) : super(key: key);
+  const CompleteProfile({Key? key, required this.userModel}) : super(key: key);
 
   @override
   _CompleteProfileState createState() => _CompleteProfileState();
@@ -115,7 +115,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) {
-          return HomePage(userModel: widget.userModel,);
+          return HomePage(userModel: widget.userModel);
         }),
       );
     });
