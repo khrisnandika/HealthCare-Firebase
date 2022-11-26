@@ -60,7 +60,9 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ),
                     TextSpan(
-                      text: user!.displayName!,
+                      text: user!.displayName.runtimeType == Null
+                          ? '-'
+                          : user!.displayName,
                       style: GoogleFonts.montserrat(
                         color: kTitleTextColor,
                         fontWeight: FontWeight.w500,

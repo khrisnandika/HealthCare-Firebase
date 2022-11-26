@@ -22,13 +22,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final global = Global();
   List Pindah = [
     Dashboard(),
     LihatSemua(),
-    PesanChat(),
-    HomePage(userModel: userModel, firebaseUser: firebaseUser),
+    // PesanChat(),
+    HomePage(userModel: UserModel()),
     // HomePage(userModel: UserModel()),
     AkunProfil()
   ];

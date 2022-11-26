@@ -4,12 +4,14 @@ import 'package:final_project/Chat/models/UserModel.dart';
 import 'package:final_project/Chat/pages/HomePage.dart';
 import 'package:final_project/Chat/pages/LoginPage.dart';
 import 'package:final_project/Onboarding/onboarding_page.dart';
+import 'package:final_project/Providers/AuthProvider.dart';
 import 'package:final_project/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = Uuid();
@@ -46,21 +48,27 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme: GoogleFonts.varelaRoundTextTheme(
-          Theme.of(context).textTheme
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => AuthProvider(),
         ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          textTheme:
+              GoogleFonts.varelaRoundTextTheme(Theme.of(context).textTheme),
+        ),
+        home: AnimatedSplashScreen(
+            splash: 'assets/image/splashscreen.png',
+            splashIconSize: 1000,
+            duration: 3000,
+            splashTransition: SplashTransition.fadeTransition,
+            backgroundColor: Color(0xff0ab885),
+            nextScreen: OnboardingPage()),
       ),
-      home: AnimatedSplashScreen(
-          splash: 'assets/image/splashscreen.png',
-          splashIconSize: 1000,
-          duration: 3000,
-          splashTransition: SplashTransition.fadeTransition,
-          backgroundColor: Color(0xff0ab885),
-          nextScreen: OnboardingPage()),
     );
   }
 }

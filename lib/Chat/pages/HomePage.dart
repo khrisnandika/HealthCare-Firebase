@@ -8,18 +8,30 @@ import 'package:final_project/Chat/pages/SearchPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   final UserModel userModel;
-  final User firebaseUser;
+  // final User firebaseUser;
+  // final userNeed = Get.put(UserModel());
 
-  const HomePage({Key? key, required this.userModel, required this.firebaseUser}) : super(key: key);
+  const HomePage({
+    Key? key,
+    required this.userModel,
+    // required this.firebaseUser,
+  }) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    print(widget.userModel.uid);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                                     MaterialPageRoute(builder: (context) {
                                       return ChatRoomPage(
                                         chatroom: chatRoomModel,
-                                        firebaseUser: widget.firebaseUser,
+                                        // firebaseUser: widget.firebaseUser,
                                         userModel: widget.userModel,
                                         targetUser: targetUser,
                                       );
@@ -141,7 +153,9 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return SearchPage(
-                userModel: widget.userModel, firebaseUser: widget.firebaseUser);
+              userModel: widget.userModel,
+              // firebaseUser: widget.firebaseUser,
+            );
           }));
         },
         child: Icon(Icons.search),

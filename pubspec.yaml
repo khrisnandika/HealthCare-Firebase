@@ -56,6 +56,7 @@ dependencies:
   concentric_transition: ^1.0.1+1
   lottie: ^2.0.0
   http: ^0.13.5
+  provider: ^6.0.4
   
 
 dev_dependencies:

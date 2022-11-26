@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({ Key? key }) : super(key: key);
@@ -51,10 +52,10 @@ class _SignUpPageState extends State<SignUpPage> {
     if(credential != null) {
       String uid = credential.user!.uid;
       UserModel newUser = UserModel(
-        uid: uid,
-        email: email,
-        fullname: "",
-        profilepic: ""
+        uid: uid as RxString,
+        email: email as RxString,
+        fullname: "" as RxString,
+        profilepic: "" as RxString, 
       );
       await FirebaseFirestore.instance.collection("users").doc(uid).set(newUser.toMap()).then((value) {
         print("New User Created!");

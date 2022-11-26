@@ -7,7 +7,10 @@ class DetailInformasi extends StatelessWidget {
   var _imageUrl;
   var _title;
 
-  DetailInformasi(this._imageUrl, this._title);
+  DetailInformasi(
+    this._imageUrl,
+    this._title,
+  );
 
   @override
   Widget build(BuildContext context) {

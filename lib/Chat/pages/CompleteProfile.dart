@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -105,16 +106,16 @@ class _CompleteProfileState extends State<CompleteProfile> {
     // String? imageUrl = await snapshot.ref.getDownloadURL();
     String? fullname = fullNameController.text.trim();
 
-    widget.userModel.fullname = fullname;
+    widget.userModel.fullname = fullname as RxString;
     // widget.userModel.profilepic = imageUrl;
 
-    await FirebaseFirestore.instance.collection("users").doc(widget.userModel.uid).set(widget.userModel.toMap()).then((value) {
+    await FirebaseFirestore.instance.collection("users").doc(widget.userModel.uid.toString()).set(widget.userModel.toMap()).then((value) {
       log("Data uploaded!");
       Navigator.popUntil(context, (route) => route.isFirst);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) {
-          return HomePage(userModel: widget.userModel, firebaseUser: widget.firebaseUser);
+          return HomePage(userModel: widget.userModel,);
         }),
       );
     });

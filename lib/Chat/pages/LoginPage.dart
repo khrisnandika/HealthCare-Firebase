@@ -3,19 +3,21 @@ import 'package:final_project/Chat/models/UIHelper.dart';
 import 'package:final_project/Chat/models/UserModel.dart';
 import 'package:final_project/Chat/pages/HomePage.dart';
 import 'package:final_project/Chat/pages/SignUpPage.dart';
+import 'package:final_project/Providers/AuthProvider.dart';
+import 'package:final_project/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({ Key? key }) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -23,10 +25,10 @@ class _LoginScreenState extends State<LoginScreen> {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
-    if(email == "" || password == "") {
-      UIHelper.showAlertDialog(context, "Incomplete Data", "Please fill all the fields");
-    }
-    else {
+    if (email == "" || password == "") {
+      UIHelper.showAlertDialog(
+          context, "Incomplete Data", "Please fill all the fields");
+    } else {
       logIn(email, password);
     }
   }
@@ -37,31 +39,45 @@ class _LoginScreenState extends State<LoginScreen> {
     UIHelper.showLoadingDialog(context, "Logging In..");
 
     try {
-      credential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-    } on FirebaseAuthException catch(ex) {
+      credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      print(credential);
+    } on FirebaseAuthException catch (ex) {
       // Close the loading dialog
       Navigator.pop(context);
 
       // Show Alert Dialog
-      UIHelper.showAlertDialog(context, "An error occured", ex.message.toString());
+      UIHelper.showAlertDialog(
+          context, "An error occured", ex.message.toString());
     }
 
-    if(credential != null) {
+    if (credential != null) {
       String uid = credential.user!.uid;
-      
-      DocumentSnapshot userData = await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      UserModel userModel = UserModel.fromMap(userData.data() as Map<String, dynamic>);
+
+      DocumentSnapshot userData =
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      UserModel userModel =
+          UserModel.fromMap(userData.data() as Map<String, dynamic>);
 
       // Go to HomePage
       print("Log In Successful!");
+      Provider.of<AuthProvider>(
+        context,
+        listen: false,
+      )
+          .setUser(
+            userModel,
+          )
+          .then((value) => print(value));
       Navigator.popUntil(context, (route) => route.isFirst);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) {
-            return HomePage(userModel: userModel, firebaseUser: credential!.user!,);
-          }
-        ),
+        MaterialPageRoute(builder: (context) {
+          return MyHomePage(
+            title: "ok",
+            // firebaseUser: credential!.user!,
+          );
+        }),
       );
     }
   }
@@ -78,34 +94,31 @@ class _LoginScreenState extends State<LoginScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-
-                  Text("Chat App", style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
-                    fontSize: 45,
-                    fontWeight: FontWeight.bold
-                  ),),
-
-                  SizedBox(height: 10,),
-
+                  Text(
+                    "Chat App",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize: 45,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   TextField(
                     controller: emailController,
-                    decoration: InputDecoration(
-                      labelText: "Email Address"
-                    ),
+                    decoration: InputDecoration(labelText: "Email Address"),
                   ),
-
-                  SizedBox(height: 10,),
-
+                  SizedBox(
+                    height: 10,
+                  ),
                   TextField(
                     controller: passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: "Password"
-                    ),
+                    decoration: InputDecoration(labelText: "Password"),
                   ),
-
-                  SizedBox(height: 20,),
-
+                  SizedBox(
+                    height: 20,
+                  ),
                   CupertinoButton(
                     onPressed: () {
                       checkValues();
@@ -113,7 +126,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Theme.of(context).colorScheme.secondary,
                     child: Text("Log In"),
                   ),
-
                 ],
               ),
             ),
@@ -124,27 +136,24 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
-            Text("Don't have an account?", style: TextStyle(
-              fontSize: 16
-            ),),
-
+            Text(
+              "Don't have an account?",
+              style: TextStyle(fontSize: 16),
+            ),
             CupertinoButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpPage();
-                    }
-                  ),
+                  MaterialPageRoute(builder: (context) {
+                    return SignUpPage();
+                  }),
                 );
               },
-              child: Text("Sign Up", style: TextStyle(
-                fontSize: 16
-              ),),
+              child: Text(
+                "Sign Up",
+                style: TextStyle(fontSize: 16),
+              ),
             ),
-
           ],
         ),
       ),
